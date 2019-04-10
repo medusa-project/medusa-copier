@@ -63,7 +63,8 @@ Future Directions
 
 * Possibly add 'copy' command to handle directory copies.
 * Possibly use rclone rcd/rc instead of spawning new rclones all the time, although for our
-  use doing the latter is not likely to be a big deal.
+  use doing the latter is not likely to be a big deal. It's possible that we might be able
+  to do better error handling that way, though. I haven't explored it very much yet.
 * Possibly make the rclone config file configurable
 * Possibly include a copy of rclone to be used so everything is self contained
 * Possibly containerize
