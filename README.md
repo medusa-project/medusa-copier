@@ -1,3 +1,6 @@
+Overview
+========
+
 This is a simple service, built on top of our 
 [simple-queue-server](https://github.com/medusa-project/simple-queue-server) gem.
 
@@ -5,6 +8,10 @@ The server configures a lot of storage endpoints. Clients who wish to copy conte
 endpoint to another send the server a message and it does it. (It may seem overkill to have a 
 separate service to do this, but our particular system topology argues for it.) Rclone is used
 in order to take advantage of its ability to handle various storage types.
+
+Rclone's full capabilities aren't being used in a single-copy mode, but more than once of these
+can be run in order to make things more parallel. If we do develop a full 'copy' mode, then 
+we should be able to use rclone more fully.
 
 Configuration
 =============
@@ -28,7 +35,8 @@ Requests
 ========
 
 See the [simple-queue-server](https://github.com/medusa-project/simple-queue-server)
-for the basic request format.
+for the basic request format. As always, you should put enough identifying information 
+into the pass through.
 
 copyto action:
 
@@ -40,13 +48,23 @@ This action essentially executes 'rclone copyto source_root:source_key target_ro
   - source key
   - target root
   - target key
-  
-And: 
 
 - Outgoing parameters:
 
-  In any case, assuming the message was parseable and had all the needed incoming parameters, they are
-  returned. Also rclone_status will be returned with the rclone exit status, if available. 
+  No outgoing parameters are currently specified to be returned.
+  
+  rclone_status will be returned with the rclone exit status code, if available, at the top level.
   
   If there is an error then some sort of error message is returned in 'message', possibly with additional
-  information in the parameters when I determine them.
+  information.
+  
+Future Directions
+=================
+
+* Possibly add 'copy' command to handle directory copies.
+* Possibly use rclone rcd/rc instead of spawning new rclones all the time, although for our
+  use doing the latter is not likely to be a big deal.
+* Possibly make the rclone config file configurable
+* Possibly include a copy of rclone to be used so everything is self contained
+* Possibly containerize
+  
