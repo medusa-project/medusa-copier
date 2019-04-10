@@ -32,7 +32,7 @@ for the basic request format.
 
 copyto action:
 
-This action essentially executes 'rclone copyto source_root:source_key target_root_target_key' 
+This action essentially executes 'rclone copyto source_root:source_key target_root:target_key' 
 
 - Incoming parameters:
 
