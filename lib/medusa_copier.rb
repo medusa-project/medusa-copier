@@ -4,11 +4,12 @@ require 'open3'
 
 class MedusaCopier < SimpleQueueServer::Base
 
-  attr_accessor :roots
+  attr_accessor :roots, :rclone_config_path
 
   def initialize(args = {})
     super
     self.roots = Config.roots.to_h
+    self.rclone_config_path = Config.rclone_config_path
   end
 
   def handle_copy_request(interaction)
@@ -21,7 +22,9 @@ class MedusaCopier < SimpleQueueServer::Base
       interaction.fail_generic('Unrecognized root was provided.') and return
     end
     self.logger.info "Copying #{request.source_target}:#{request.source_key} to #{request.target_root}:#{request.target_key}"
-    out, err, status = Open3.capture3('rclone', 'copyto', source_string(request), target_string(request))
+    rclone_call_args = ['rclone', 'copyto', source_string(request), target_string(request)]
+    rclone_call_args += ['--config', rclone_config_path] if rclone_config_path
+    out, err, status = Open3.capture3(*rclone_call_args)
     interaction.response.set_parameter(:rclone_status, status.exitstatus)
     if status.success?
       interaction.succeed(request.to_h)

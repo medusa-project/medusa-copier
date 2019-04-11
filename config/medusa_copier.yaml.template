@@ -11,6 +11,8 @@ amqp:
     :port: 5672
 log:
   level: :info
+#May specify path to the rclone config file to use; if not set then just use the default
+rclone_config_path: ~
 #The client will have to know the appropriate root names. Rclone will have to be configured so that
 #it has a configuration entry that maps to the right location. The 'alias' type will be useful for
 #filesystem mounts. For S3 mounts you may want to have a correctly configured S3 type mount and then
@@ -22,3 +24,4 @@ roots:
     rclone_config: source
   target_name:
     rclone_config: target
+
