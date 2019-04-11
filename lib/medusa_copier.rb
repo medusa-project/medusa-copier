@@ -8,8 +8,8 @@ class MedusaCopier < SimpleQueueServer::Base
 
   def initialize(args = {})
     super
-    self.roots = Config.roots.to_h
-    self.rclone_config_path = Config.rclone_config_path
+    self.roots = Settings.roots.to_h
+    self.rclone_config_path = Settings.rclone_config_path
   end
 
   def handle_copy_request(interaction)
