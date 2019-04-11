@@ -23,13 +23,13 @@ case "$1" in
 	if [ -f $PID_FILE ]; then
 	    PID=`cat $PID_FILE`
 	    COMMAND=`ps -p $PID -o comm=`
-	    if [ ${COMMAND##/*/} = "java" ]; then
+	    if [[ ${COMMAND##/*/} = "java" ]]; then
 		    echo "Killing medusa_copier.rb pid: $PID"
 		    kill $PID
-      elif [ ${COMMAND##/*/} = "./medusa_copier.rb run" ]; then
+      elif [[ ${COMMAND##/*/} = "./medusa_copier.rb run" ]]; then
         echo "Killing medusa_copier.rb pid: $PID"
 		    kill $PID
-      elif [ ${COMMAND##/*/} = "bundle" ]; then
+      elif [[ ${COMMAND##/*/} = "bundle" ]]; then
         echo "Killing medusa_copier.rb pid: $PID"
         kill $PID
 	    else
