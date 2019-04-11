@@ -8,32 +8,38 @@ class MedusaCopier < SimpleQueueServer::Base
 
   def initialize(args = {})
     super
-    self.roots = Settings.roots.to_h
+    self.logger.level = :info
+    self.roots = Settings.roots
     self.rclone_config_path = Settings.rclone_config_path
   end
 
-  def handle_copy_request(interaction)
+  def handle_copyto_request(interaction)
     request = RequestData.new(interaction)
-    request.set_response_data(interaction)
     unless request.valid?
       interaction.fail_generic('Not all request parameters were provided.') and return
     end
-    unless roots[request.source_root] and roots[request.target_root]
-      interaction.fail_generic('Unrecognized root was provided.') and return
+    self.logger.info "source: #{request.source_root} target: #{request.target_root}"
+    self.logger.info roots.to_h
+    unless roots[request.source_root.to_sym] and roots[request.target_root.to_sym]
+      interaction.fail_generic('Unrecognized root was provided.' + roots.inspect) and return
     end
-    self.logger.info "Copying #{request.source_target}:#{request.source_key} to #{request.target_root}:#{request.target_key}"
+    self.logger.info "Copying #{request.source_root}:#{request.source_key} to #{request.target_root}:#{request.target_key}"
     rclone_call_args = ['rclone', 'copyto', source_string(request), target_string(request)]
     rclone_call_args += ['--config', rclone_config_path] if rclone_config_path
     out, err, status = Open3.capture3(*rclone_call_args)
     interaction.response.set_parameter(:rclone_status, status.exitstatus)
     if status.success?
-      self.logger.info "Copied #{request.source_target}:#{request.source_key} to #{request.target_root}:#{request.target_key}"
+      self.logger.info "Copied #{request.source_root}:#{request.source_key} to #{request.target_root}:#{request.target_key}"
       interaction.succeed(request.to_h)
     else
       error = "Unknown copying error: #{err}"
       self.logger.error(error)
       interaction.fail_generic(error)
     end
+  rescue Exception => e
+    error = "Unknown error: #{e}"
+    self.logger.error(error)
+    interaction.fail_generic(error)
   end
 
   def source_string(request)
@@ -45,7 +51,7 @@ class MedusaCopier < SimpleQueueServer::Base
   end
 
   def rclone_string(root_name, key)
-    config_name = roots[root_name]['rclone_config']
+    config_name = roots[root_name.to_sym][:rclone_config]
     config_name + ':' + key
   end
 

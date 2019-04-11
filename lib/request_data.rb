@@ -11,13 +11,7 @@ class RequestData
   end
 
   def valid?
-    FIELDS.all {|field| self.send(field)}
-  end
-
-  def set_response_data(interaction)
-    FIELDS.each do |field|
-      interaction.response.set_parameter(field, self.send(field))
-    end
+    FIELDS.all? {|field| self.send(field)}
   end
 
   def to_h
