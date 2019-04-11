@@ -16,11 +16,12 @@ class MedusaCopier < SimpleQueueServer::Base
   def handle_copyto_request(interaction)
     request = RequestData.new(interaction)
     unless request.valid?
-      interaction.fail_generic('Not all request parameters were provided.') and return
+      error = "Not all request parameters were provided. #{request.raw_request}"
+      self.logger.error(error)
+      interaction.fail_generic(error) and return
     end
-    self.logger.info "source: #{request.source_root} target: #{request.target_root}"
-    self.logger.info roots.to_h
-    unless roots[request.source_root.to_sym] and roots[request.target_root.to_sym]
+    unless roots[request.source_root] and roots[request.target_root]
+      self.logger.error "Unrecognized root #{request.source_root} or #{request.target_root}"
       interaction.fail_generic('Unrecognized root was provided.' + roots.inspect) and return
     end
     self.logger.info "Copying #{request.source_root}:#{request.source_key} to #{request.target_root}:#{request.target_key}"
@@ -36,10 +37,6 @@ class MedusaCopier < SimpleQueueServer::Base
       self.logger.error(error)
       interaction.fail_generic(error)
     end
-  rescue Exception => e
-    error = "Unknown error: #{e}"
-    self.logger.error(error)
-    interaction.fail_generic(error)
   end
 
   def source_string(request)
@@ -51,7 +48,7 @@ class MedusaCopier < SimpleQueueServer::Base
   end
 
   def rclone_string(root_name, key)
-    config_name = roots[root_name.to_sym][:rclone_config]
+    config_name = roots[root_name][:rclone_config]
     config_name + ':' + key
   end
 
