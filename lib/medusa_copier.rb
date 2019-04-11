@@ -27,10 +27,12 @@ class MedusaCopier < SimpleQueueServer::Base
     out, err, status = Open3.capture3(*rclone_call_args)
     interaction.response.set_parameter(:rclone_status, status.exitstatus)
     if status.success?
-      interaction.succeed(request.to_h)
       self.logger.info "Copied #{request.source_target}:#{request.source_key} to #{request.target_root}:#{request.target_key}"
+      interaction.succeed(request.to_h)
     else
-      interaction.fail_generic("Unknown copying error: #{err}")
+      error = "Unknown copying error: #{err}"
+      self.logger.error(error)
+      interaction.fail_generic(error)
     end
   end
 
