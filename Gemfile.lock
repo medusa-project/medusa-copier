@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/medusa-project/simple-queue-server.git
-  revision: ff807c197c32e0d6e91ad1d96b4befcea004220f
+  revision: 4b681f684ef56887e99d6e658ce655c66f9ae403
   specs:
-    simple-queue-server (2.2.3)
+    simple-queue-server (2.2.4)
       aws-sdk-sqs
       bunny
       config
@@ -68,6 +68,7 @@ GEM
       dry-types (~> 0.14.0)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
+    irb (1.0.0)
     jmespath (1.4.0)
     macaddr (1.7.1)
       systemu (~> 2.6.2)
@@ -86,7 +87,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  irb
   simple-queue-server!
 
 BUNDLED WITH
-   1.17.2
+   2.0.1
