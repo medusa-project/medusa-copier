@@ -73,6 +73,7 @@ GEM
     macaddr (1.7.1)
       systemu (~> 2.6.2)
     minitest (5.11.3)
+    parallel (1.17.0)
     retryable (3.0.4)
     systemu (2.6.5)
     thread_safe (0.3.6)
@@ -88,6 +89,7 @@ PLATFORMS
 
 DEPENDENCIES
   irb
+  parallel
   simple-queue-server!
 
 BUNDLED WITH
