@@ -1,7 +1,6 @@
-.idea/
-*~
-*.iml
+config/
 log/
 run/
 tmp/
 volumes/
+docker-config/

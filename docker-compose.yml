@@ -1,0 +1,87 @@
+#See the docs https://docs.docker.com/compose/compose-file/ for ways this might be shortened up - in particular
+#we should be able to use an indirection for everything but the run/log volumes. Or maybe not - yaml may not
+#allow this particular type of thing to happen.
+version: "3.5"
+
+
+
+services:
+  copier_1:
+    image: medusa-copier:latest
+    volumes:
+      - ./docker-config:/usr/src/app/config
+      - ./volumes/run_1:/usr/src/app/run
+      - ./volumes/log_1:/usr/src/app/log
+      - ./tmp/source:/usr/src/app/tmp/source
+      - ./tmp/target:/usr/src/app/tmp/target
+      - ./tmp/ua-film:/usr/src/app/tmp/ua-film
+
+  copier_2:
+    image: medusa-copier:latest
+    volumes:
+      - ./docker-config:/usr/src/app/config
+      - ./volumes/run_2:/usr/src/app/run
+      - ./volumes/log_2:/usr/src/app/log
+      - ./tmp/source:/usr/src/app/tmp/source
+      - ./tmp/target:/usr/src/app/tmp/target
+      - ./tmp/ua-film:/usr/src/app/tmp/ua-film
+
+  copier_3:
+    image: medusa-copier:latest
+    volumes:
+      - ./docker-config:/usr/src/app/config
+      - ./volumes/run_3:/usr/src/app/run
+      - ./volumes/log_3:/usr/src/app/log
+      - ./tmp/source:/usr/src/app/tmp/source
+      - ./tmp/target:/usr/src/app/tmp/target
+      - ./tmp/ua-film:/usr/src/app/tmp/ua-film
+
+  copier_4:
+    image: medusa-copier:latest
+    volumes:
+      - ./docker-config:/usr/src/app/config
+      - ./volumes/run_4:/usr/src/app/run
+      - ./volumes/log_4:/usr/src/app/log
+      - ./tmp/source:/usr/src/app/tmp/source
+      - ./tmp/target:/usr/src/app/tmp/target
+      - ./tmp/ua-film:/usr/src/app/tmp/ua-film
+
+  copier_5:
+    image: medusa-copier:latest
+    volumes:
+      - ./docker-config:/usr/src/app/config
+      - ./volumes/run_5:/usr/src/app/run
+      - ./volumes/log_5:/usr/src/app/log
+      - ./tmp/source:/usr/src/app/tmp/source
+      - ./tmp/target:/usr/src/app/tmp/target
+      - ./tmp/ua-film:/usr/src/app/tmp/ua-film
+
+  copier_6:
+    image: medusa-copier:latest
+    volumes:
+      - ./docker-config:/usr/src/app/config
+      - ./volumes/run_6:/usr/src/app/run
+      - ./volumes/log_6:/usr/src/app/log
+      - ./tmp/source:/usr/src/app/tmp/source
+      - ./tmp/target:/usr/src/app/tmp/target
+      - ./tmp/ua-film:/usr/src/app/tmp/ua-film
+
+  copier_7:
+    image: medusa-copier:latest
+    volumes:
+      - ./docker-config:/usr/src/app/config
+      - ./volumes/run_7:/usr/src/app/run
+      - ./volumes/log_7:/usr/src/app/log
+      - ./tmp/source:/usr/src/app/tmp/source
+      - ./tmp/target:/usr/src/app/tmp/target
+      - ./tmp/ua-film:/usr/src/app/tmp/ua-film
+
+  copier_8:
+    image: medusa-copier:latest
+    volumes:
+      - ./docker-config:/usr/src/app/config
+      - ./volumes/run_8:/usr/src/app/run
+      - ./volumes/log_8:/usr/src/app/log
+      - ./tmp/source:/usr/src/app/tmp/source
+      - ./tmp/target:/usr/src/app/tmp/target
+      - ./tmp/ua-film:/usr/src/app/tmp/ua-film
