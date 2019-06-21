@@ -3,8 +3,6 @@
 #allow this particular type of thing to happen.
 version: "3.5"
 
-
-
 services:
   copier_1:
     image: medusa-copier:latest
