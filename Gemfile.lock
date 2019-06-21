@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/medusa-project/simple-queue-server.git
-  revision: 1f063d07d46eced1e042df534beeb5b54fd28140
+  revision: de1419136edd80da74330647cf76aa2b127a6241
   specs:
-    simple-queue-server (2.2.5)
+    simple-queue-server (2.2.6)
       aws-sdk-sqs
       bunny
       config
