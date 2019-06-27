@@ -79,14 +79,12 @@ GEM
     retryable (3.0.4)
     systemu (2.6.5)
     thread_safe (0.3.6)
-    thread_safe (0.3.6-java)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uuid (2.3.9)
       macaddr (~> 1.0)
 
 PLATFORMS
-  java
   ruby
 
 DEPENDENCIES
@@ -95,4 +93,4 @@ DEPENDENCIES
   simple-queue-server!
 
 BUNDLED WITH
-   2.0.1
+   2.0.2
