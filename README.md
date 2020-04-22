@@ -1,3 +1,7 @@
+# DEPRECATED
+
+### As April 2020, using Globus transfer API in Medusa Collection Registry instead.
+
 Overview
 ========
 
