@@ -71,7 +71,7 @@ GEM
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     irb (1.0.0)
-    jmespath (1.4.0)
+    jmespath (1.6.1)
     macaddr (1.7.2)
       systemu (~> 2.6.5)
     minitest (5.11.3)
